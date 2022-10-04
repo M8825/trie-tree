@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+
+.Temp {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+
+.Search-box {
+  display: grid;
+  grid-template: repeat(2, 1rf) / 40% 60%;
+
+}
+
+
+
+.Search-box__search{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+}
+
+.inp > input{
+  height: 2rem;
+  width: 30rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgray;
+  padding-left: 1rem;
+  font-size: 17px;
+
+}
+
+.inp > input:hover {
+  height: 2rem;
+  width: 30rem;
+  outline: none !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.inp > input:focus {
+  outline: none;
+}
+
+.Results {
+  width: 29rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.Results > li {
+  padding: 5px;
+}
