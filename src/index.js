@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-const  Trie = require('./trie.js');
-
+import raw from './names.txt';
+const Trie = require('./trie');
 
 
 class Wrapped extends React.Component {
@@ -20,12 +20,12 @@ class Wrapped extends React.Component {
   	this.setState({results})
   }
 
+
 	render(){
-  	const { results } = this.state
   	return (
       <div class="Search-box">
         <div class="Temp">
-          <h1>Trei Search:</h1>
+          <h1 class="Title">Trie Search:</h1>
         </div>
           <div class="Search-box__search">
             <Search onSearch={this.search} />
@@ -49,47 +49,34 @@ class Search extends React.Component {
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
+
   _buildTrie() {
-    let root = new Trie();
-    let names = [
-        'malkhaz',
-        'malo',
-        'mal',
-        'meg',
-        'peter',
-        'louis',
-        'stevie',
-        'jonathan',
-        'jon',
-        'john',
-        'david',
-        'dave',
-        'daniel',
-        'lory',
-        'larry',
-        'linux',
-        'cornel',
-        'manny'
-    ]
-  
-      for (let i = 0; i < names.length; i++) {
-          root.add(names[i]);
-      }
+    let root = new Trie();  // initialize root node
 
-      return root;
+    // fetch names from .txt file and create trie
+    fetch(raw).then((r) => r.text()).then((text) => {
+      text.split(/\r?\n/).forEach((name) => root.add(name));
+    });
+
+    return root;
   }
-  
 
-  // Take care input values and querie Trie
+  
+  // take care input values and query Trie
   handleOnChange(e){
   	this.setState({
     	[e.target.name]: e.target.value
     }, () => {
-    	setTimeout(() => {
+        let userInput = "";
 
-        const results = this.root.search(this.state.searchValue);
-        this.props.onSearch(results)
-      }, 1000)
+        // we need input greater than zero to capitalize first letter of the input
+        // all names in trie start with capital letter 
+        if (this.state.searchValue.length > 0) {
+          userInput = (this.state.searchValue[0].toUpperCase() + this.state.searchValue.slice(1))
+        } 
+
+        const results = this.root.search(userInput);  
+        this.props.onSearch(results) // call to a search method of trie class and pass user input
     })	
   }
   
