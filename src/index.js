@@ -29,6 +29,7 @@ class Wrapped extends React.Component {
         </div>
           <div class="Search-box__search">
             <Search onSearch={this.search} />
+            // TODO: solve error handling on number input
             <Result {...this.state} />
           </div>
       </div>
@@ -43,12 +44,15 @@ class Search extends React.Component {
 	constructor(props){
   	super(props);
     this.state = {
-    	searchValue: ''
+    	searchValue: '',
     }
     this.root = this._buildTrie();
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
+  static hasError(res=false) {
+    return res;
+  }
 
   _buildTrie() {
     let root = new Trie();  // initialize root node
@@ -61,6 +65,7 @@ class Search extends React.Component {
     return root;
   }
 
+
   
   // take care input values and query Trie
   handleOnChange(e){
@@ -71,15 +76,22 @@ class Search extends React.Component {
 
         // we need input greater than zero to capitalize first letter of the input
         // all names in trie start with capital letter 
+
+
         if (this.state.searchValue.length > 0) {
           userInput = (this.state.searchValue[0].toUpperCase() + this.state.searchValue.slice(1))
         } 
 
-        const results = this.root.search(userInput);  
-        this.props.onSearch(results) // call to a search method of trie class and pass user input
-    })	
+        const results = this.root.search(userInput);
+        if (Number(userInput[userInput.length - 1])) {
+          Search.hasError(true);
+        } else {
+          this.props.onSearch(results) // call to a search method of trie class and pass user input
+        }  
+    })
   }
-  
+
+
 	render(){
   	return (
     	<div class="inp">
@@ -90,13 +102,21 @@ class Search extends React.Component {
 }
 
 // list search
-const Result = ({results}) => {
+const Result = ({results}) => {  
 	return (
     <ul class="Results">
       {results.map(result => <li key={result}>{result}</li>)}
     </ul>
 
   )
+}
+
+if (Search.hasError) {
+  const Error = () => {
+    return (
+      <span>Name contains only letters</span>
+    )
+  }
 }
 
 // Render page

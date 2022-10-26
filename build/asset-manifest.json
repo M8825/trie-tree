@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/trie-tree/static/css/main.8e3ea220.css",
+    "main.js": "/trie-tree/static/js/main.ad47166e.js",
+    "static/js/787.28cb0dcd.chunk.js": "/trie-tree/static/js/787.28cb0dcd.chunk.js",
+    "static/media/names.txt": "/trie-tree/static/media/names.6c4b8ebaee3032f7ead5.txt",
+    "index.html": "/trie-tree/index.html",
+    "main.8e3ea220.css.map": "/trie-tree/static/css/main.8e3ea220.css.map",
+    "main.ad47166e.js.map": "/trie-tree/static/js/main.ad47166e.js.map",
+    "787.28cb0dcd.chunk.js.map": "/trie-tree/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8e3ea220.css",
+    "static/js/main.ad47166e.js"
+  ]
+}
